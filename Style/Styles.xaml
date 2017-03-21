@@ -1,0 +1,78 @@
+﻿<ResourceDictionary x:Class="ConEmuTestProj.Style.Styles"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:proj="clr-namespace:ConEmuTestProj">
+
+    <Color x:Key="ForeColor">FloralWhite</Color>
+    <Color x:Key="BackColor">SteelBlue</Color>
+    <Brush x:Key="ForeBrush">FloralWhite</Brush>
+    <Brush x:Key="BackBrush">SteelBlue</Brush>
+    
+    <Color x:Key="RibbonForeColor">FloralWhite</Color>
+    <Color x:Key="RibbonBackColor">SteelBlue</Color>
+    <Brush x:Key="RibbonForeBrush">FloralWhite</Brush>
+    <Brush x:Key="RibbonBackBrush">SteelBlue</Brush>
+
+    <proj:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <proj:VisibilityToColumnSpanConverter x:Key="VisibilityToColumnSpanConverter" />
+
+
+    <Style x:Key="ImageEnabled" TargetType="Image">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.25"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type ContentControl}">
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+
+
+    
+
+    <ControlTemplate x:Key="ValidationErrorTemplate">
+        <DockPanel LastChildFill="True">
+            <Ellipse Width="13"
+                     Height="13"
+                     Margin="-25,0,0,0"
+                     DockPanel.Dock="Right"
+                     Fill="Red"
+                     StrokeThickness="1"
+                     ToolTip="{Binding ElementName=AdornedControl,
+                                       Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                <Ellipse.Stroke>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Offset="0" Color="#FFFA0404" />
+                        <GradientStop Offset="1" Color="#FFC9C7C7" />
+                    </LinearGradientBrush>
+                </Ellipse.Stroke>
+                <Ellipse.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource FlashErrorIcon}" />
+                    </EventTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
+
+            
+            <Border BorderBrush="Red" BorderThickness="1">
+                <AdornedElementPlaceholder Name="AdornedControl" />
+            </Border>
+
+        </DockPanel>
+    </ControlTemplate>
+
+    <Style x:Key="EnableDownloadsStyle" TargetType="CheckBox">
+        <Setter Property="Content" Value="Enable Downloads"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="10 10 0 10" />
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+
+    
+</ResourceDictionary>
